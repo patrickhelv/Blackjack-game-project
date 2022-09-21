@@ -1,5 +1,5 @@
 # Blackjack-game-project
-Black Jack card game made for the TDT4102 - Prosedyre- og objektorientert programmering course.
+Black Jack card game made for the TDT4102 - Prosedyre- og objektorientert programmering course. Runs in the terminal. Technically does not require FLTK and graphic libraries but it was made in the course and we had to include the dependencies.
 
 ## Dependencies
 - FLTK
