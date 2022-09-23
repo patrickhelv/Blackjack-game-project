@@ -3,10 +3,33 @@
 using namespace std;
 
 
-int Blackjack::checkcardAS(vector<Card> playercard){
+int Blackjack::checkcardAS(vector<Card> playercard, int asvalue){
     int input = 0;
+
     for(int i = 0; i < playercard.size(); i++){
-        if(playercard[i].getRank() == Rank::ace){ 
+        if(playercard[i].getRank() == Rank::ace){
+            input++;
+        }
+    }
+    if(input > 0 && asvalue == 0 || (asvalue == 11 || asvalue == 1)){
+        if(asvalue == 0 && input == 2){
+            for(int i = 0; i < input; i++){
+                cout << "Do you want ace to be 1 or 11 ?\n";
+                cout << "1) 1" << endl;
+                cout << "2) 11" << endl;
+                cin >> input;
+                while(cin.fail() || input > 2 || input < 1){
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<int>::max(),'\n');
+                    cout << "error you did not enter 1 or 11, re-enter either 1 or 2\n";
+                    cout << "Do you want ace to be 1 or 11 ?\n";
+                    cout << "1) 1" << endl;
+                    cout << "2) 11" << endl;
+                    cin >> input;
+                }
+            }
+        }else if(asvalue == 0){
+
             cout << "Do you want ace to be 1 or 11 ?\n";
             cout << "1) 1" << endl;
             cout << "2) 11" << endl;
@@ -20,12 +43,14 @@ int Blackjack::checkcardAS(vector<Card> playercard){
                 cout << "2) 11" << endl;
                 cin >> input;
             }
-            if(input == 1){
-                return 1;
-            }else{
-                return 11;
-            }
         }
+        
+        if(input == 1){
+            return 1;
+        }else{
+            return 11;
+        }
+        
     }
     return 0;
 }
@@ -209,7 +234,9 @@ void Blackjack::startgame(){
         }
         while(!ch){
             printplayercard(playercard);
-            asvalue = checkcardAS(playercard);
+            if(asvalue == 0 || (asvalue == 1 || asvalue == 11)){
+                asvalue += checkcardAS(playercard, asvalue);
+            }
 
             if(asvalue == 11){
                 sumcardplayer += asvalue + sumvaluecard(playercard) - sumcardplayer - 1;

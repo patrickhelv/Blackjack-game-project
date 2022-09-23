@@ -6,7 +6,7 @@ class Blackjack{
     private:
         vector<Card> playercard;
         vector<Card> dealercard;
-        int checkcardAS(vector<Card> playercard);
+        int checkcardAS(vector<Card> playercard, int asvalue);
         void printplayercard(vector<Card> playercards);
         int choiceinput(vector<Card> cardplayer);
         int sumvaluecard(vector<Card> cards);
